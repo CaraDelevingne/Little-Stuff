@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0 auto;
+            padding: 0;
+        }
+        .container{
+            width: 500px;height: 500px;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var can=document.getElementById("MyCanvas");
+            var MyCanvas=can.getContext("2d");
+            MyCanvas.strokeStyle="red";
+            var oLeft=can.offsetLeft;
+            var oTop=can.offsetTop;
+            can.onmousedown=function(e){
+
+                MyCanvas.beginPath();
+                MyCanvas.moveTo(e.pageX-oLeft,e.pageY-oTop);
+
+                can.onmousemove=function(e){
+                    MyCanvas.lineTo(e.pageX-oLeft,e.pageY-oTop);
+                    MyCanvas.stroke();
+                };
+
+                can.onmouseup=function(){
+                    can.onmouseup=null;
+                    can.onmousemove=null;
+                }
+            };
+            can.onmouseover=function(){
+                can.onmouseup=null;
+                can.onmousemove=null;
+            }
+
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <canvas style="border: thin solid red;" width="500" height="500" id="MyCanvas"></canvas>
+</div>
+</body>
+</html>

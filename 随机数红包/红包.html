@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>红包</title>
+	<style>
+	
+		#header{
+			width: 300px;
+			height: 500px;
+			background: red;
+			margin-left: 40%;
+			position: relative;
+			border-radius: 5px;
+		}
+		#btna{
+			margin:20px 120px;
+			position: absolute;
+		}
+		#btnb{
+			margin: 450px 120px;
+			position: absolute;
+		}
+		.box{
+			color: #fff;
+			text-align: center;
+			font-size: 30px;
+			height: 100px;
+			width: 300px;
+		}
+		.text1{
+			position: absolute;
+			top: 100px;	
+		}
+		.text2{
+			position: absolute;
+			top: 200px;
+		}
+	</style>
+</head>
+<body>
+	<div id="header">
+		
+		<div class="box text1"></div>
+		<div class="box text2"></div>
+		<input type="button" value="抢红包" id="btnb">
+	</div>
+</body>
+<script>
+	window.onload=function(){
+		var btna=document.getElementById('btna');
+		var text1=document.getElementsByClassName('text1')[0];
+		var text2=document.getElementsByClassName('text2')[0];
+		//发红包的金额和份数
+
+		//将money从字符串转化为整数，数字类型
+		var money=parseInt(prompt("输入金额"));
+		text1.innerHTML=money;
+		var sl=parseInt(prompt("份数"));
+		text2.innerHTML=sl;
+		if(String(money).indexOf(" ")!=-1 || String(sl).indexOf(" ")!=-1 || money.length==0 || sl.length==0){
+			alert("请输入")
+		};
+		//抢红包
+		var btnb=document.getElementById('btnb');
+		btnb.onclick=function(){
+			sl--;
+			//随机数保留两位小数
+			var reg=(Math.random()*(money)/2).toFixed(2);
+			if(reg==0){
+				reg=0.01;
+			}
+			if(sl<0){
+				alert("没得了");
+				return false;
+			}
+			if(sl==0){
+				alert(text1.innerHTML);
+				text1.innerHTML=0;
+				text2.innerHTML=0;
+				return false;
+			}
+
+			//剩余红包内的金额，转化为浮点类型
+			text1.innerHTML="剩余金额"+parseFloat((money-reg).toFixed(2));
+			//剩余的红包
+			text2.innerHTML="剩余红包"+sl;
+			//给金额重新赋值
+			money-=reg;
+			alert(reg)
+			
+		}
+	}
+</script>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css" rel="stylesheet">
+        *{
+            margin: 0 auto;
+            padding: 0;
+            list-style-type: none;
+            text-decoration: none;
+        }
+        .content{
+            height: 700px;
+            width: 1000px;
+            border: thin solid #000000;
+        }
+        .small{
+            width: 310px;
+            height: 310px;
+            float: left;
+            margin: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        .small img{
+            border: thin solid #000000;
+        }
+        .look{
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 2;
+            display: none;
+        }
+        .copy{
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 310px;
+            width: 310px;
+            z-index: 100;
+        }
+        .big{
+            height: 300px;
+            width: 300px;
+            margin: 10px;
+            float: left;
+            overflow: hidden;
+            border: thin solid #000000;
+            position: relative;
+        }
+        .big_{
+            width: 800px;
+            height: 800px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+    <script src="jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script>
+        $(function(){
+            var $small=$(".small");
+            /* 左边小图 */
+            var $look=$(".look");
+            /* 放大镜 */
+            var $copy=$(".copy");
+            /* 覆盖层 */
+            var $big=$(".big");
+            /* 右边显示放大镜窗口 */
+            var $big_=$(".big_");
+            /* 右边大图 */
+            var oWidth=(parseInt($small[0].offsetWidth)/parseInt($big_[0].offsetWidth))*parseInt($big[0].offsetWidth);
+            /* 小图的宽除以大图的宽 求得比例 乘以右边显示窗口大小 获得放大镜的宽 */
+            var oHeight=(parseInt($small[0].offsetHeight)/parseInt($big_[0].offsetHeight))*parseInt($big[0].offsetHeight);
+            /* 求高 */
+            $look.css({"width":parseInt(oWidth),"height":parseInt(oHeight)});
+            /* 向放大镜宽高赋值 */
+            $big.hide();
+            /* 隐藏右边显示窗口 */
+            $copy.mousemove(function(e){
+                $look.show();
+                /* 显示放大镜 */
+                $big.show();
+                /* 显示右边窗口 */
+                var oLeft= e.pageX;
+                /* 获取window对象的坐标 */
+                var oTop= e.pageY;
+
+                var lookWidth=parseInt(oLeft-$small[0].offsetLeft)-parseInt($look[0].offsetWidth)/2;
+                var lookHeight=parseInt(oTop-$small[0].offsetTop)-parseInt($look[0].offsetHeight)/2;
+                /* 获取鼠标在放大镜的位置 */
+                if(lookWidth<0){
+//                    console.log(lookWidth);
+                    lookWidth=0;}
+                if(lookHeight<0){
+
+                    lookHeight=0;}
+
+                if(lookHeight>parseInt($small[0].offsetHeight)-parseInt($look[0].offsetHeight)){
+//                    console.log(lookHeight);
+                    lookHeight=parseInt($small[0].offsetHeight)-parseInt($look[0].offsetHeight)+0.5;
+                    /* 当鼠标的高度超出放大镜一半，赋值在放大镜的中心 */
+                }
+                if(lookWidth>parseInt($small[0].offsetWidth)-parseInt($look[0].offsetWidth)){
+                    lookWidth=parseInt($small[0].offsetWidth)-parseInt($look[0].offsetWidth)+0.5;
+                }
+
+                $look.css({"top":lookHeight,"left":lookWidth});
+
+                var bigLeft=(parseInt($big_[0].offsetWidth)/parseInt($small[0].offsetWidth))*lookWidth;
+                var bigTop=(parseInt($big_[0].offsetHeight)/parseInt($small[0].offsetHeight))*lookHeight;
+
+                /* 求大图移动的比例 */
+                $big_.css({"top":-bigTop,"left":-bigLeft})
+            });
+            $copy.mouseout(function(){
+                $look.hide();
+                $big.hide();
+            });
+
+        })
+    </script>
+</head>
+<body>
+<div class="content">
+    <div class="small">
+        <div class="copy"></div>
+        <img src="image/blue_one_small.jpg">
+        <div class="look"></div>
+    </div>
+    <div class="big">
+        <img src="image/blue_one_big.jpg" class="big_">
+    </div>
+    <div class="a"></div>
+</div>
+</body>
+</html>
