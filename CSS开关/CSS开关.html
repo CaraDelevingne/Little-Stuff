@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS模拟开关</title>
+	<style>
+		*{
+			margin:0 auto;
+			padding: 0;
+		}
+		.toggle{
+			width: 100px;
+			height: 30px;
+			margin: 20px auto;
+			position: relative;
+			box-shadow: inset 0 1px 1px rgba(0,0,0,0.5),0 1px 0 rgba(225,225,225,0.2);
+			border-radius: 50px;
+			background: #333;
+		}
+		.toggle:before{
+			content: "ON";
+			color: #f66;
+			position: absolute;
+			left: 10px;
+			z-index: 0;
+			font:12px/30px Arial,sans-serif;
+			font-weight: bold;
+		}
+		.toggle:after{
+			content: "OFF";
+			color: #fff;
+			position: absolute;
+			right: 10px;
+			z-index: 0;
+			font:12px/30px Arial,sans-serif;
+			font-weight: bold;
+			/*text-shadow: 1px 1px 0px rgba(225,225,225,0.15);*/
+		}
+		.toggle label{
+			display: block;
+			width: 34px;
+			height: 20px;
+			cursor: pointer;
+			position: absolute;
+			top: 5px;
+			left: 5px;
+			z-index: 1;
+			-webkit-transition: all 0.5s ease;
+			-moz-transition: all 0.5s ease;
+			-ms-transition: all 0.5s ease;
+			transition: all 0.5s ease;
+			border-radius: 50px;
+			box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+			background: #fcfff4;
+		}
+		.toggle input[type=checkbox]{
+			display: none;
+		}
+		.toggle input:checked + label{
+			left: 60px;
+		}
+	</style>
+</head>
+<body>
+	<div class="toggle">
+		<input type="checkbox" checked id="check">
+		<label for="check"></label>
+	</div>
+</body>
+</html>
