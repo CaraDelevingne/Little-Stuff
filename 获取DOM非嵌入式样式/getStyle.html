@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            width:100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+<script>
+    /**
+     * 获取DOM非嵌入式样式
+     * @param obj
+     * @param name
+     * @returns {*}
+     */
+    function getStyle (obj,name) {
+        if (obj.currentStyle){
+            return obj.currentStyle[name];
+        }else{
+            return getComputedStyle(obj,null)[name];//IE不支持 
+        }
+    }
+
+    
+    /**
+     * other way
+     */
+    //obj.currentStyle?obj.currentStyle.getAttribute('name'):obj.getComputedStyle.getPropertyValue('name');
+
+    var divbox = document.getElementById("box");
+    alert(getStyle(divbox,"width"));
+</script>
+</html>
