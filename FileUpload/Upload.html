@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Upload</title>
+	<style>
+		body>div{
+			width: 400px;
+			height: 500px;
+			border:thin solid #000;
+		}
+		body>div>div:first-child{
+			width: 200px;
+			height: 200px;
+			border:thin solid red;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="local">
+		<div class="imagePreview">
+			<img src="" alt="">
+		</div>
+		<input type="file" name="" id="">
+	</div>
+	<div id="upload_URL">
+		<div class="imagePreview">
+			<img src="" alt="">
+		</div>
+		<div>
+			<input type="text">
+			<input type="button" value="Click">
+		</div>
+	</div>
+</body>
+<script src="../JQ库/jquery-3.1.0.min.js"></script>
+<script src="FileUpload.js"></script>
+<script>
+	var PREVIEW_BOX = $(".imagePreview");
+	$("#local>input").change(function(){
+		
+		CheckAndPreviewFile(this,$("#local img"),PREVIEW_BOX.width(),PREVIEW_BOX.height(),function(data){})
+	})
+	$("#upload_URL input[type='button']").click(function(){
+        CheckAndPreviewURL($("#upload_URL input[type='text']"),$("#upload_URL img"),PREVIEW_BOX.width(),PREVIEW_BOX.height(),function(data){})
+    });
+</script>
+</html>
