@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Event Loop</title>
+</head>
+
+<body>
+  <button id="btn">Event Loop test</button>
+  check in console
+  <script type="text/javascript">
+    let btn = document.querySelector('#btn')
+    console.log('start')
+
+
+    btn.onclick = _ => {
+      console.log('button clicked')
+      new Promise(resolve => {
+        console.log('promise')
+        setTimeout(_ => {
+          console.log('setTimeout!')
+        }, 0)
+        resolve()
+        Promise.resolve().then(_ => console.log('resolve2'))
+      }).then(_ => {
+        console.log('resolve')
+      })
+    }
+
+    const throttle = (fn, interval) => {
+      let isFirst = true, timer
+
+      return (...args) => {
+        let that = this
+        if (isFirst) {
+          fn.apply(this, [...args])
+          return isFirst = false
+        }
+        if (timer) return
+        timer = setTimeout(() => {
+          clearTimeout(timer)
+          timer = null
+
+          fn.apply(that, [...args])
+        }, interval)
+      }
+    }
+
+    window.onresize = throttle(function () {
+      console.log(1)
+    }, 800)
+
+  </script>
+</body>
+
+</html>

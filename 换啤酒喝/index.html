@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>两块买一瓶啤酒, 两个瓶子换一瓶啤酒, 4个瓶盖也能换一瓶啤酒; 用10块一共能喝多少瓶啤酒</div>
+  <script type="text/javascript">
+    let fn = money => {
+      let result = 0, caps = 0, bottle = 0;
+      for (let i = 0, len = money / 2; i < len; i++) {
+        bottle++;
+        result++;
+        caps++;
+        console.log(i)
+        console.log('bottle: ' + bottle)
+        console.log('caps: ' + caps)
+        console.log('\n')
+        while (bottle % 2 === 0 || caps % 4 === 0) {
+          let newBeer = parseInt(bottle / 2) + parseInt(caps / 4);
+          result += newBeer;
+          caps = caps % 4 + newBeer;
+          bottle = bottle % 2 + newBeer;
+        }
+      }
+      return result
+    }
+
+    console.log(fn(10)) // 15
+
+  </script>
+</body>
+
+</html>
