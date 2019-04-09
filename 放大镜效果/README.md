@@ -2,4 +2,4 @@
 js练习放大镜
 
 
-### [DEMO](https://caraws.github.io/Little-Stuff/放大镜效果/index.html)
+### [DEMO](https://caraws.github.io/JavaScript/放大镜效果/index.html)
