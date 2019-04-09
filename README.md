@@ -1,2 +1,2 @@
-# Little-Stuff
-一些平时的小练习
+# JavaSCript
+一些平时的小练习和日常积累
