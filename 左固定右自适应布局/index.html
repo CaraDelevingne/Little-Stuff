@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自适应布局</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		h2 {
+			text-align: center;
+			color: 	#00BFFF;
+		}
+		.box::after {
+			content: '';
+			display: table;
+			clear: both;
+		}
+		.box > div {
+			height: 200px;
+			color: #fff;
+		}
+
+		.box > p {
+			margin: 20px 0;
+		}
+
+		.box > div:nth-child(even) {
+			width: 200px;
+			background: green;
+		}
+
+		.box > div:nth-child(odd) {
+			background: skyblue;
+		}
+		/* 浮动 */
+		.left1 {
+			float: left;
+			
+		}
+
+		.right1 {
+			width: auto;
+			margin-left: -200px;
+		}
+
+		/* 负值 margin + float */
+		.left2 {
+			float: left;
+			margin-right: -100%;
+		}
+
+		.right2 {
+			float: right;
+			width: 100%;
+		}
+
+		.right2 > .inner {
+			margin-left: 200px;
+		}
+
+		/* display: table; */
+		.table-box {
+			display: table;
+			width: 100%;
+			color: #fff;
+		}
+
+		.left3 {
+			width: 200px;
+			height: 200px;
+			display: table-cell;
+			background: green;
+		}
+
+		.right3 {
+			display: table-cell;
+			height: 200px;
+			background: skyblue;
+		}
+
+		/* calc */
+		.left4 {
+			float: left;
+		}
+
+		.right4 {
+			width: calc(100% - 200px);
+			float: left;
+		}
+
+		/* flex */
+		.flex-box {
+			display: flex;
+			color: #fff;
+		}
+
+		.left5 {
+			flex-basis: 200px;
+			height: 200px;
+			background: green;
+		}
+		
+		.right5 {
+			flex: 1;
+			height: 200px;
+			background: skyblue;
+		}
+	</style>
+</head>
+<body>
+	<h2>左边固定, 右边自适应</h2>
+	<br>	
+	<div class="box">
+		<p>浮动实现</p>
+		<div class="left1">
+			固定
+		</div>
+		<div class="right1">
+			自适应
+		</div>
+
+		<p>margin负值实现</p>
+		<div class="right2">
+			<div class="inner">
+				自适应
+			</div>
+			
+		</div>
+		<div class="left2" >
+			固定
+		</div>
+
+		<p>display: table实现</p>
+		<section class="table-box">
+			<div class="left3">固定</div>
+			<div class="right3">自适应</div>
+		</section>
+
+		<p>calc 属性实现</p>
+		<div class="left4">固定</div>
+		<div class="right4">自适应</div>
+
+		<p>flex 实现</p>
+		<section class="flex-box">
+			<div class="left5">固定</div>
+			<div class="right5">自适应</div>
+		</section>
+	</div>
+</body>
+</html>
