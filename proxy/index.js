@@ -18,7 +18,7 @@ const createdArray = (...element) => {
 }
 
 let arr = createdArray('c', 'a', 'r', 'a')
-console.log(arr[-2])
+console.log(arr[-2]) // 'r'
 
 // 链式操作
 const pipe = (() => {
@@ -47,4 +47,4 @@ const calc = {
     return n * n
   }
 }
-console.log(pipe(3).double.pow.get)
+console.log(pipe(3).double.pow.get) // 36
